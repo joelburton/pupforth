@@ -10,10 +10,3 @@ dependencies = [
 
 [project.scripts]
 pupforth = "pupforth.cli:cli"
-
-#[build-system]
-#requires = ["flit_core<4"]
-#build-backend = "flit_core.buildapi"
-#
-#[tool.flit.module]
-#name = "inout"

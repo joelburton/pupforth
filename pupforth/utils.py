@@ -1,3 +1,5 @@
+"""General utilities."""
+
 # ANSI color codes
 RESET = "\u001b[0m"
 RED = "\u001b[31m"

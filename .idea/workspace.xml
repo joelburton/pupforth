@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c496b72d-6f4f-4123-93ff-a13a55e7ff4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pupforth.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.f" afterDir="false" />
+    <list default="true" id="c496b72d-6f4f-4123-93ff-a13a55e7ff4e" name="Changes" comment="Starting.">
+      <change afterPath="$PROJECT_DIR$/pupforth/lib.f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pupforth/primitives.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pupforth-history.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.pupforth-history.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/words.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/words.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +51,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/joel/PycharmProjects/pupforth",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -60,6 +61,32 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="pupforth.cli" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="pupforth" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (pupforth)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="pupforth.cli" />
+      <option name="PARAMETERS" value="pupforth/lib.f" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="true" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -77,8 +104,17 @@
       <option name="presentableId" value="Default" />
       <updated>1739658410538</updated>
       <workItem from="1739658412998" duration="639000" />
-      <workItem from="1739659058181" duration="24852000" />
+      <workItem from="1739659058181" duration="35510000" />
     </task>
+    <task id="LOCAL-00001" summary="Starting.">
+      <option name="closed" value="true" />
+      <created>1739686133309</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739686133309</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,6 +122,10 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.f" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Starting." />
+    <option name="LAST_COMMIT_MESSAGE" value="Starting." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
