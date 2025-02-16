@@ -1,0 +1,14 @@
+pyproject.toml
+pupforth/__init__.py
+pupforth/cli.py
+pupforth/exceptions.py
+pupforth/main.py
+pupforth/stack.py
+pupforth/utils.py
+pupforth/words.py
+pupforth.egg-info/PKG-INFO
+pupforth.egg-info/SOURCES.txt
+pupforth.egg-info/dependency_links.txt
+pupforth.egg-info/entry_points.txt
+pupforth.egg-info/requires.txt
+pupforth.egg-info/top_level.txt

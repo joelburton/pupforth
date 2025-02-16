@@ -1,0 +1,7 @@
+Metadata-Version: 2.2
+Name: pupforth
+Version: 1.0.0
+Summary: Simple Forth interpreter with big dreams and hopes.
+Requires-Python: >=3.11
+Requires-Dist: click>=8.1
+Requires-Dist: prompt-toolkit
