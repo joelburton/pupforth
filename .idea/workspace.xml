@@ -96,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739658410538</updated>
       <workItem from="1739658412998" duration="639000" />
-      <workItem from="1739659058181" duration="41794000" />
+      <workItem from="1739659058181" duration="42149000" />
     </task>
     <task id="LOCAL-00001" summary="Starting.">
       <option name="closed" value="true" />
@@ -122,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739703018268</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Better CLI handling.">
+      <option name="closed" value="true" />
+      <created>1739703370002</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739703370002</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
