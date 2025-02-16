@@ -15,10 +15,18 @@ are interested, feel free to reach out!
 Installation & Running
 ----------------------
 
+Installing in a venv:
+
 ::
 
+    python3 -m venv venv
+    source venv/bin/activate
     pip install git+https://github.com/joelburton/pupforth.git
 
+Running:
+
 ::
 
+    pupforth
     pupforth --help
+    echo "1 2 + ." | pupforth -q

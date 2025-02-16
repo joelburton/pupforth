@@ -24,3 +24,12 @@ Repository = "https://github.com/joelburton/pupforth.git"
 
 [project.scripts]
 pupforth = "pupforth.cli:cli"
+
+[build-system]
+requires = [
+    "setuptools>=60",
+    "setuptools-scm>=8.0"
+]
+
+#[tool.setuptools.package-data]
+#pupforth = ["*.f"]
