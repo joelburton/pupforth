@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c496b72d-6f4f-4123-93ff-a13a55e7ff4e" name="Changes" comment="Add variables and tidy docstrings.">
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.rst" beforeDir="false" afterPath="$PROJECT_DIR$/readme.rst" afterDir="false" />
-    </list>
+    <list default="true" id="c496b72d-6f4f-4123-93ff-a13a55e7ff4e" name="Changes" comment="Add variables and tidy docstrings." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739658410538</updated>
       <workItem from="1739658412998" duration="639000" />
-      <workItem from="1739659058181" duration="48395000" />
+      <workItem from="1739659058181" duration="49224000" />
     </task>
     <task id="LOCAL-00001" summary="Starting.">
       <option name="closed" value="true" />
@@ -141,7 +138,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739735528450</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add variables and tidy docstrings.">
+      <option name="closed" value="true" />
+      <created>1739735909808</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739735909808</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add variables and tidy docstrings.">
+      <option name="closed" value="true" />
+      <created>1739735971339</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739735971339</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
