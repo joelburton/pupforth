@@ -3,6 +3,7 @@ pupforth/__init__.py
 pupforth/cli.py
 pupforth/exceptions.py
 pupforth/main.py
+pupforth/primitives.py
 pupforth/stack.py
 pupforth/utils.py
 pupforth/words.py

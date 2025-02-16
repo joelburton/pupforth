@@ -1,12 +1,26 @@
 [project]
 name = "pupforth"
-version = "1.0.0"
+readme = "readme.rst"
+dynamic = ["version"]
+license = {text="GPL-3.0-or-later"}
 description = "Simple Forth interpreter with big dreams and hopes."
+keywords = ["forth"]
 requires-python = ">=3.11"
 dependencies = [
     "click>=8.1",
     "prompt-toolkit",
 ]
+authors = [
+    {name="Joel Burton", email="joel@joelburton.com"}
+]
+
+
+[tool.setuptools.dynamic]
+version = {attr = "pupforth.__version__"}
+
+[project.urls]
+Homepage = "https://github.com/joelburton/pupforth"
+Repository = "https://github.com/joelburton/pupforth.git"
 
 [project.scripts]
 pupforth = "pupforth.cli:cli"

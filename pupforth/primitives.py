@@ -4,9 +4,8 @@ Many more words are implemented in Forth; see lib.f.
 """
 
 import dis
-import sys
 
-from .exceptions import ForthError
+from .exceptions import ForthError, ForthBye
 from .utils import RESET, GREEN
 from .words import new_word, new_col, PrimWord, ColWord
 
@@ -196,7 +195,7 @@ def words_plus(st):
 @new_word("bye")
 def bye(st):
     """( -- )                       Quit program."""
-    sys.exit()
+    raise ForthBye()
 
 
 @new_word('s"', compilation=True)

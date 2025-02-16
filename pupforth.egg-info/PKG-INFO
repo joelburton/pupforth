@@ -1,7 +1,13 @@
 Metadata-Version: 2.2
 Name: pupforth
-Version: 1.0.0
+Version: 1.0.1
 Summary: Simple Forth interpreter with big dreams and hopes.
+Author-email: Joel Burton <joel@joelburton.com>
+License: GPL-3.0-or-later
+Project-URL: Homepage, https://github.com/joelburton/pupforth
+Project-URL: Repository, https://github.com/joelburton/pupforth.git
+Keywords: forth
 Requires-Python: >=3.11
+Description-Content-Type: text/x-rst
 Requires-Dist: click>=8.1
 Requires-Dist: prompt-toolkit
