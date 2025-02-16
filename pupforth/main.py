@@ -13,7 +13,9 @@ class State:
     inp_buffer: str = ""
     inp_pos: int = 0
     compiling: str = None
+    force_immediate: bool = False    # 1 2 [ ." hey" ] 3 4
     # colon_start: int = 0
+    memory: list = []
 
     @property
     def latest(self):
@@ -34,7 +36,7 @@ class State:
             self.stk.push(number)
 
         op = self.stk.peek()
-        if self.compiling:
+        if self.compiling and not self.force_immediate:
             if op.compilation:
                 execute(self)
             else:

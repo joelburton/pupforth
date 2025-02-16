@@ -1,9 +1,32 @@
-3 2 + . cr
-1 2 + . cr
-words
-cr s" oh hai" tell
-40 double .
-\ 11 add5 .
-8 9 .s
-\ greet
-\ cr greet2
+\ Just some simple tests:
+
+s" test.f running ===============" tell cr
+
+42 constant meaning-of-life
+s" the meaning of life is" tell meaning-of-life . cr
+
+variable foo
+s" foo =" tell
+7 foo !
+foo ?
+8 foo !
+s" and then =" tell
+foo ?
+cr
+
+1 dup .s cr
+hide dup
+hidden? dup . cr
+unhide dup
+
+: msg s" my message!" ;
+: times3 [[ ( n1 -- n2 ) Multiply by 3. ]] [ msg tell ] 3 * ; cr
+help times3
+9 times3 .
+cr
+s" SEE for times3:" tell cr
+see times3
+
+cr
+s" test.f done ==================" tell cr cr
+

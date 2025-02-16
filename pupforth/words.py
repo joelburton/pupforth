@@ -3,6 +3,8 @@
 from dataclasses import dataclass
 from typing import Callable, Self
 
+from .utils import parse_docstring
+
 
 @dataclass
 class Word:
@@ -30,8 +32,8 @@ class PrimWord(Word):
         super().__init__(next_, name, doc, False, compilation, immediate)
         self.code = code
 
-    def __call__(self, st):
-        self.code(st)
+    def __call__(self, st, *args, **kwargs):
+        self.code(st, *args, **kwargs)
 
 
 class ColWord(Word):
@@ -59,7 +61,7 @@ def new_word(name=None, compilation=False, immediate=True):
         nf = PrimWord(
             next_=new_word.latest,
             name=name or func.__name__,
-            doc=func.__doc__,
+            doc=parse_docstring(func.__doc__ or ""),
             compilation=compilation,
             immediate=immediate,
             code=func,
@@ -77,7 +79,7 @@ def new_col(name, wordlist: list[Callable | int | str], doc="", compilation=Fals
     nf = ColWord(
         next_=new_word.latest,
         name=name,
-        doc=doc,
+        doc=parse_docstring(doc),
         words=wordlist,
         compilation=compilation,
         immediate=immediate,

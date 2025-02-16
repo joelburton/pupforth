@@ -4,15 +4,16 @@ Many more words are implemented in Forth; see lib.f.
 """
 
 import dis
+import ctypes
 
-from .exceptions import ForthError, ForthBye
+from .exceptions import ForthError, ParseError, ForthBye
 from .utils import RESET, GREEN
 from .words import new_word, new_col, PrimWord, ColWord
 
 
 @new_word()
 def word(self):
-    """( -- tok )                   Get next token to stack."""
+    """( -- tok ) Get next token to stack."""
     nw = ""
 
     try:
@@ -24,17 +25,17 @@ def word(self):
         self.inp_pos += 1
         self.stk.push(nw)
     except IndexError:
-        raise ForthError("Couldn't find next token.")
+        raise ParseError("Couldn't find next token.")
 
 @new_word()
 def drop(st):
-    """( n -- )                     Drop top item."""
+    """( n -- ) Drop top item."""
     st.stk.pop()
 
 
 @new_word()
 def rot(st):
-    """( n1 n2 n3 -- n2 n3 n1 )     Left-rotate top 3 items."""
+    """( n1 n2 n3 -- n2 n3 n1 ) Left-rotate top 3 items."""
 
     n3 = st.stk.pop()
     n2 = st.stk.pop()
@@ -46,20 +47,20 @@ def rot(st):
 
 @new_word()
 def dup(st):
-    """( n -- n n )                 Duplicate top item."""
+    """( n -- n n ) Duplicate top item."""
     st.stk.push(st.stk.peek())
 
 
 @new_word("tell")
 @new_word(".")
 def dot(st):
-    """( n -- )                     Pop and output top item."""
+    """( n -- ) Pop and output top item."""
     print(st.stk.pop(), end=' ')
 
 
 @new_word("number", compilation=True)
 def number(st):
-    """( w -- n )                   Parse word as number."""
+    """( w -- n ) Parse word as number."""
     n = st.stk.pop()
     try:
         n = int(n)
@@ -74,19 +75,19 @@ def number(st):
 
 @new_word("+")
 def add(st):
-    """( n1 n2 -- sum )             Add n1 + n2."""
+    """( n1 n2 -- sum ) Add n1 + n2."""
     st.stk.push(st.stk.pop() + st.stk.pop())
 
 
 @new_word("*")
 def mul(st):
-    """( n1 n2 -- prod )            Multiply n1 * n2."""
+    """( n1 n2 -- prod ) Multiply n1 * n2."""
     st.stk.push(st.stk.pop() * st.stk.pop())
 
 
 @new_word("/mod")
 def divmod_(st):
-    """( n1 n2 -- rem quot )        Int divide into remainder and quotient."""
+    """( n1 n2 -- rem quot ) Int divide into remainder and quotient."""
     n1 = st.stk.pop()
     n2 = st.stk.pop()
     try:
@@ -99,13 +100,13 @@ def divmod_(st):
 
 @new_word("negate")
 def negate(st):
-    """( n1 -- -n1 )                Negate top number."""
+    """( n1 -- -n1 ) Negate top number."""
     st.stk.push(-st.stk.pop())
 
 
 @new_word("and")
 def and_(st):
-    """( n1 n2 -- n3 )              n1 AND n2 -> n3."""
+    """( n1 n2 -- n3 ) n1 AND n2 -> n3."""
 
     n2 = st.stk.pop()
     n1 = st.stk.pop()
@@ -114,7 +115,7 @@ def and_(st):
 
 @new_word("or")
 def or_(st):
-    """( n1 n2 -- n3 )              n1 OR n2 -> n3."""
+    """( n1 n2 -- n3 ) n1 OR n2 -> n3."""
 
     n2 = st.stk.pop()
     n1 = st.stk.pop()
@@ -123,7 +124,7 @@ def or_(st):
 
 @new_word()
 def invert(st):
-    """( n1 -- n2 )                 Invert n1 (~n1) to n2."""
+    """( n1 -- n2 ) Invert n1 (~n1) to n2."""
 
     n1 = st.stk.pop()
     st.stk.push(~n1)
@@ -131,7 +132,7 @@ def invert(st):
 
 @new_word("xor")
 def xor(st):
-    """( n1 n2 -- n3 )              n1 XOR n2 -> n3."""
+    """( n1 n2 -- n3 ) n1 XOR n2 -> n3."""
 
     n2 = st.stk.pop()
     n1 = st.stk.pop()
@@ -140,7 +141,7 @@ def xor(st):
 
 @new_word()
 def bsl(st):
-    """( n1 -- n2 )                 Bitshift n1 << 1 -> n3."""
+    """( n1 -- n2 ) Bitshift n1 << 1 -> n3."""
 
     n1 = st.stk.pop()
     st.stk.push(n1 << 1)
@@ -148,7 +149,7 @@ def bsl(st):
 
 @new_word()
 def bsr(st):
-    """( n1 -- n2 )                 Bitshift n1 >> 1 -> n3."""
+    """( n1 -- n2 ) Bitshift n1 >> 1 -> n3."""
 
     n1 = st.stk.pop()
     st.stk.push(n1 >> 1)
@@ -156,7 +157,7 @@ def bsr(st):
 
 @new_word("swap")
 def swap(st):
-    """( n1 n2 -- n2 n1 )           Swap top two items."""
+    """( n1 n2 -- n2 n1 ) Swap top two items."""
     n2 = st.stk.pop()
     n1 = st.stk.pop()
     st.stk.push(n2)
@@ -172,7 +173,7 @@ def quit_(st):
 
 @new_word("words")
 def words_(st):
-    """( -- )                       Show all defined words."""
+    """( -- ) Show all defined words."""
     cw = st.latest
     while cw:
         if not cw.hidden:
@@ -183,7 +184,7 @@ def words_(st):
 
 @new_word("words+")
 def words_plus(st):
-    """( -- )                       Show all defined words and help."""
+    """( -- ) Show all defined words and help."""
     cw = st.latest
     while cw:
         if not cw.hidden:
@@ -194,7 +195,7 @@ def words_plus(st):
 # noinspection PyUnusedLocal
 @new_word("bye")
 def bye(st):
-    """( -- )                       Quit program."""
+    """( -- ) Quit program."""
     raise ForthBye()
 
 
@@ -211,6 +212,19 @@ def literal_str_st(st):
     else:
         st.stk.push(cs)
 
+# @new_word('ss"')
+# def literal_str_st(st):
+#     cs = ""
+#     while st.inp_buffer[st.inp_pos] != '"':
+#         cs += st.inp_buffer[st.inp_pos]
+#         st.inp_pos += 1
+#     st.inp_pos += 1
+#
+#     if st.compiling:
+#         st.col_stk.push(cs)
+#     else:
+#         st.stk.push(cs)
+
 
 # noinspection PyUnusedLocal
 @new_word('lit-string')
@@ -221,7 +235,7 @@ def literal_str(st):
 
 @new_word(".s")
 def stack_dump(st):
-    """( -- )                       Show dump of stack."""
+    """( -- ) Show dump of stack."""
     print(
         f"{GREEN}<{len(st.stk)}>{RESET} "
         f"{' '.join(map(repr, st.stk))}"
@@ -231,48 +245,47 @@ def stack_dump(st):
 
 @new_word("\\")
 def line_comment(st):
-    """( -- )                       Ignore until end of line."""
+    """( -- ) Ignore until end of line."""
     while st.inp_pos < len(st.inp_buffer) and st.inp_buffer[st.inp_pos] != '\\':
         st.inp_pos += 1
 
 
 @new_word("(", compilation=True)
 def paren_comment(st):
-    """( -- )                       Ignore as comment until ')'."""
+    """( -- ) Ignore as comment until ')'."""
 
     # FIXME: works when shouldn't for ( foo bar), ( foo bar)., etc
     # change imp to getting words and looking for ) token ?
 
-    try:
-        ni = st.inp_buffer.index(")")
-    except ValueError:
-        raise ForthError("Invalid comment")
-    st.docstring = st.inp_buffer[st.inp_pos:ni].strip()
-    st.inp_pos = ni + 1
+    while True:
+        word(st)
+        wd = st.stk.pop()
+        if wd == ")":
+            break
 
 
 @new_word("clearstack")
 def clear_stack(st):
-    """( -- EMPTY )                 Clear stack."""
+    """( -- EMPTY ) Clear stack."""
     st.stk.clear()
 
 
 @new_word()
 def depth(st):
-    """( -- n )                     Put depth of stack on top."""
+    """( -- n ) Put depth of stack on top."""
     st.stk.push(len(st.stk))
 
 
 # noinspection PyUnusedLocal
 @new_word()
 def abort(st):
-    """( -- EMPTY )                 Clear stack and abort."""
+    """( -- EMPTY ) Clear stack and abort."""
     raise ForthError("Aborted")
 
 
 @new_word("help@")
 def help_at(st):
-    """( w -- str )                 Put help for w on top."""
+    """( w -- str ) Put help for w on top."""
     word(st)
     find(st)
     st.stk.push(st.stk.pop().doc)
@@ -280,16 +293,16 @@ def help_at(st):
 
 @new_word("constant")
 def constant(st):
-    """( n -- )                     Def const: `42 constant wtf-life`."""
+    """( n -- ) Def const: `42 constant wtf-life`."""
 
     word(st)
     name = st.stk.pop()
-    new_col(name, [number, st.stk.pop()])
+    new_col(name, [st.stk.pop(), number])
 
 
 @new_word("char")
 def char_(st):
-    """( -- n )                     Push next word as literal char."""
+    """( -- n ) Push next word as literal char."""
 
     word(st)
     if len(st.stk.peek()) != 1:
@@ -298,7 +311,7 @@ def char_(st):
 
 @new_word("emit")
 def emit(st):
-    """( n -- )                     Print ASCII char from code."""
+    """( n -- ) Print ASCII char from code."""
 
     ch = st.stk.pop()
     print(chr(ch), end='')
@@ -306,7 +319,7 @@ def emit(st):
 
 @new_word("hide")
 def hide(st):
-    """( -- )                       Hide next word."""
+    """( -- ) Hide next word."""
 
     word(st)
     find(st)
@@ -316,29 +329,27 @@ def hide(st):
 
 @new_word("hidden?")
 def hidden_q(st):
-    """( -- )                       Is next word hidden?"""
-
-    # should we just modify .find to allow finding hidden-words with flag?
+    """( -- ) Is next word hidden?"""
 
     word(st)
-    find(st)
+    find(st, find_hidden=True)
     wd = st.stk.pop()
     st.stk.push(-1 if wd.hidden else 0)
 
 
 @new_word("unhide")
 def unhide(st):
-    """( -- )                       Unhide next word."""
+    """( -- ) Unhide next word."""
 
     word(st)
-    find(st)
+    find(st, find_hidden=True)
     w = st.stk.pop()
     w.hidden = False
 
 
 @new_word()
 def forget(st):
-    """( -- )                       Forget word and all subsequent words."""
+    """( -- ) Forget word and all subsequent words."""
     word(st)
     find(st)
     wd = st.stk.pop()
@@ -347,7 +358,7 @@ def forget(st):
 
 @new_word()
 def see(st):
-    """( -- )                       Print definition of next word."""
+    """( -- ) Print definition of next word."""
 
     word(st)
     find(st)
@@ -365,24 +376,24 @@ def see(st):
 
 
 @new_word()
-def find(st):
-    """( s -- w )                   Finds word by string name."""
+def find(st, find_hidden=False):
+    """( s -- w ) Finds word by string name."""
 
-    rez = st.find()
+    rez = st.find(find_hidden)
     if rez:
         raise ForthError(f"Not word: {rez}")
 
 
 @new_word()
 def execute(st):
-    """( w -- )                     Execute word."""
+    """( w -- ) Execute word."""
 
     st.stk.pop()(st)
 
 
 @new_word(":")
 def colon(st):
-    """( -- )                       Define new word."""
+    """( -- ) Define new word."""
 
     word(st)
     name = st.stk.pop()
@@ -393,7 +404,7 @@ def colon(st):
 
 @new_word(";", compilation=True, immediate=False)
 def semicolon(st):
-    """( -- )                       End new word definition."""
+    """( -- ) End new word definition."""
 
     new_col(st.compiling, st.col_stk[:], st.docstring)
     st.compiling = None
@@ -402,7 +413,7 @@ def semicolon(st):
 
 @new_word("[[", compilation=True, immediate=False)
 def docstring_start(st):
-    """( -- )                       Start docstring, like: `: 2drop [[ n1 n2 -- ) ]] drop drop ;`"""
+    """( -- ) Start docstring, like: `: 2drop [[ n1 n2 -- ) ]] drop drop ;`"""
 
     start_i = st.inp_pos
     while True:
@@ -412,3 +423,67 @@ def docstring_start(st):
             break
 
     st.docstring = st.inp_buffer[start_i:st.inp_pos].strip().removesuffix("]]").strip()
+
+
+@new_word("dsp@")
+def dsp_r(st):
+    """( -- n ) Get location of stack pointer."""
+
+    return len(st.stk) - 1
+
+
+@new_word("dsp!")
+def dsp_w(st):
+    """( m -- ) Write location of stack pointer."""
+
+    raise NotImplementedError
+
+
+@new_word("[", compilation=True, immediate=False)
+def imm_start(st):
+    """( -- ) Start immediate mode."""
+
+    st.force_immediate = True
+
+
+@new_word("]", immediate=True)
+def imm_end(st):
+    """( -- ) End immediate mode."""
+
+    st.force_immediate = False
+
+
+@new_word("@")
+def at(st):
+    """( addr -- v ) Get value at address (variables only!)."""
+
+    val = st.memory[st.stk.pop()]
+    st.stk.push(val)
+
+
+@new_word("!")
+def bang(st):
+    """( v addr -- ) Set value at address."""
+
+    addr = st.stk.pop()
+    v = st.stk.pop()
+    st.memory[addr] = v
+
+
+@new_word("variable")
+def variable(st):
+    """( -- ) Create variable from next word."""
+
+    word(st)
+    name = st.stk.pop()
+    st.memory.append(None)
+    addr = len(st.memory) - 1
+    new_col(name, [addr])
+
+
+@new_word("'")
+def tick(st):
+    """( -- addr ) Kinda worthless right now. FIXME."""
+    word(st)
+    find(st)
+    st.stk.push(id(st.stk.pop()))

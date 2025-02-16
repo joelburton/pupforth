@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c496b72d-6f4f-4123-93ff-a13a55e7ff4e" name="Changes" comment="Better CLI handling." />
+    <list default="true" id="c496b72d-6f4f-4123-93ff-a13a55e7ff4e" name="Changes" comment="Better CLI handling.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/lib.f" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/lib.f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/primitives.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/primitives.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pupforth/words.py" beforeDir="false" afterPath="$PROJECT_DIR$/pupforth/words.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.f" beforeDir="false" afterPath="$PROJECT_DIR$/test.f" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +106,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739658410538</updated>
       <workItem from="1739658412998" duration="639000" />
-      <workItem from="1739659058181" duration="42149000" />
+      <workItem from="1739659058181" duration="48044000" />
     </task>
     <task id="LOCAL-00001" summary="Starting.">
       <option name="closed" value="true" />

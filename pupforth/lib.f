@@ -38,3 +38,4 @@
 
 : cs       [[ ( -- )                       Alias for `clearstack`         ]]    clearstack ;
 : help     [[ ( -- )                       Parse word & show its help.    ]]    help@ . cr ;
+: ?        [[ ( addr -- )                  Print value of variable.       ]]    @ . ;
