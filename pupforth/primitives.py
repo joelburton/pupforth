@@ -68,10 +68,17 @@ def number(st):
         raise ForthError(f"Not number: {n}")
 
     if st.compiling:
-        st.col_stk.push(n)
+        new_word.latest.words.append(n)
     else:
         st.stk.push(n)
 
+
+@new_word("num-get", compilation=True)
+def num_get(st, ):
+    word(st)
+    print("word-get", st.stk.peek())
+    n = int(st.stk.pop())
+    st.stk.push(n)
 
 @new_word("+")
 def add(st):
@@ -208,7 +215,7 @@ def literal_str_st(st):
     st.inp_pos += 1
 
     if st.compiling:
-        st.col_stk.push(cs)
+        new_word.latest.words.append(cs)
     else:
         st.stk.push(cs)
 
@@ -388,27 +395,54 @@ def find(st, find_hidden=False):
 def execute(st):
     """( w -- ) Execute word."""
 
+    print(f"ex {st.stk.peek()}, {st.inp_buffer}, {st.inp_pos}")
     st.stk.pop()(st)
 
+@new_word("create")
+def create(st):
+    """( -- ) Create new word entry."""
+
+    word(st)
+    name = st.stk.pop()
+    new_col(name, [], "")
+
+
+@new_word("compiling@")
+def compiling_peek(st):
+    """( -- v ) Get compiling flag."""
+    st.stk.push(st.compiling)
+
+
+@new_word("compiling!")
+def compiling_poke(st):
+    """(v -- ) Set compiling flag."""
+    st.compiling = st.stk.pop()
+
+@new_word(",")
+def comma(st):
+    """( v -- ) Append v to here."""
+
+    new_word.latest.words.append(st.stk.pop())
 
 @new_word(":")
 def colon(st):
     """( -- ) Define new word."""
 
-    word(st)
-    name = st.stk.pop()
-    st.compiling = name
-    st.docstring = ""
-    st.colon_start = len(st.stk)
+    create(st)
+    st.compiling = True
 
+@new_word("immediate")
+def immediate(st):
+    st.force_immediate = True
 
 @new_word(";", compilation=True, immediate=False)
 def semicolon(st):
     """( -- ) End new word definition."""
 
-    new_col(st.compiling, st.col_stk[:], st.docstring)
-    st.compiling = None
-    st.col_stk.clear()
+    # new_col(st.compiling, st.col_stk[:], st.docstring)
+    st.force_immediate = False
+    st.compiling = False
+    # st.col_stk.clear()
 
 
 @new_word("[[", compilation=True, immediate=False)
@@ -422,7 +456,7 @@ def docstring_start(st):
         if wd == "]]":
             break
 
-    st.docstring = st.inp_buffer[start_i:st.inp_pos].strip().removesuffix("]]").strip()
+    new_word.latest.doc =  st.inp_buffer[start_i:st.inp_pos].strip().removesuffix("]]").strip()
 
 
 @new_word("dsp@")
@@ -452,6 +486,10 @@ def imm_end(st):
 
     st.force_immediate = False
 
+@new_word("]]]", immediate=True)
+def hack(st):
+    st.force_immediate = False
+    st.compiling = True
 
 @new_word("@")
 def at(st):
@@ -487,3 +525,8 @@ def tick(st):
     word(st)
     find(st)
     st.stk.push(id(st.stk.pop()))
+
+
+@new_word("end")
+def end(st):
+    return

@@ -30,3 +30,21 @@ def parse_docstring(s, width=25):
     se = se or ""
     text = text.strip()
     return f"""{se:{width}s} {text}"""
+
+
+def to_base_n(decimal_number, base):
+    if decimal_number == 0:
+        return "0"
+
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    result = ""
+    while decimal_number > 0:
+        remainder = decimal_number % base
+        result = digits[remainder] + result
+        decimal_number //= base
+    return result
+
+
+# decimal_number = 100
+# base_16_number = to_base_n(decimal_number, 2)
+# print(base_16_number)

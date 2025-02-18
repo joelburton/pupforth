@@ -1,0 +1,7 @@
+- inspect rather than dis for primitives
+
+- my code-word-exec __call__ bypasses the whole compiling/not-compiling thing by going to execute directly
+  this prob causes lots of problems!
+
+  - gforth allows "my string" and 'c' for chars!
+

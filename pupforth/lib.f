@@ -1,5 +1,7 @@
 \ PUPFORTH STANDARD LIBRARY -- read this on startup, like "pupforth path-to/lib.f"
 
+\ Core
+
 \ IO
 
 : cr       [[ ( -- )                       Print newline.                 ]]    10 emit ;

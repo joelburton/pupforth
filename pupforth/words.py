@@ -53,6 +53,9 @@ class ColWord(Word):
         for w in self.words:
             st.stk.push(w)
             if isinstance(w, Word):
+                print(
+                    f"IN-WRD-CALL ex {st.stk.peek()}, {st.inp_buffer}, "
+                    f"{st.inp_pos}")
                 st.stk.pop()(st)
 
 

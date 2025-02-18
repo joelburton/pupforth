@@ -1,3 +1,5 @@
+import traceback
+
 from .exceptions import ForthError
 from .stack import Stack
 from .words import new_word
@@ -8,11 +10,10 @@ class State:
     """State machine for the overall Forth environment."""
 
     stk: Stack = Stack()
-    col_stk: Stack = Stack()
     ret_stack: Stack = Stack()
     inp_buffer: str = ""
     inp_pos: int = 0
-    compiling: str = None
+    compiling: str = False
     force_immediate: bool = False    # 1 2 [ ." hey" ] 3 4
     # colon_start: int = 0
     memory: list = []
@@ -25,6 +26,7 @@ class State:
 
     def interpret(self):
         """Main interp: parse word, find it (or find ok number), exec it."""
+
         try:
             word(self)
         except ForthError:
@@ -40,7 +42,7 @@ class State:
             if op.compilation:
                 execute(self)
             else:
-                self.col_stk.push(self.stk.pop())
+                new_word.latest.words.append(self.stk.pop())
         else:
             if not op.immediate:
                 raise ForthError("Cannot use in immediate mode")
@@ -54,6 +56,7 @@ class State:
         Finds hidden words with is_hidden.
         If not found, returns token searched for.
         """
+
         w = self.stk.pop()
         cur = self.latest
         while cur:
@@ -73,6 +76,7 @@ def process(st, inp):
     try:
         quit_(st)
     except ForthError as e:
+        traceback.print_exc()
         clear_stack(st)
         st.compiling = None
         raise e
